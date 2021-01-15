@@ -1,0 +1,145 @@
+% Exercise 2
+% Model structure uncertainty with MARRMoT
+%
+% Authors: Knoben, W. J. M. & Spieler, D.
+% Date: 2021-01-10
+
+\documentclass[12pt]{article}
+
+%\usepackage{macros_local}
+\usepackage{amsmath}
+\usepackage{alltt}
+\usepackage{booktabs}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{pdflscape}
+\usepackage[dvipsnames,table]{xcolor}
+\usepackage{float}
+\usepackage{natbib}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    citecolor=blue,
+}
+
+\urlstyle{same}
+
+\usepackage{cleveref}
+
+\topmargin  = 0pt
+\headheight = 0pt
+\headsep    = 0pt
+
+\voffset    = 0in
+\hoffset    = 0in
+\textheight = 230mm
+\textwidth  = 164mm
+
+\evensidemargin = 0pt
+\oddsidemargin  = 0pt
+
+\begin{document}
+
+%% ------------------------------------------------------------------
+%% --- Header
+%% ------------------------------------------------------------------
+
+\begin{center}
+Teaching hydrologic modelling\\
+Showcasing model structure uncertainty with a ready-to-use teaching module \\
+\vspace*{3mm}
+Exercise 2: model structure uncertainty\\
+\end{center}
+
+\bigskip
+
+%% ------------------------------------------------------------------
+%% --- Introduction
+%% ------------------------------------------------------------------
+
+\section{Introduction}
+
+In this exercise, you will calibrate two different MARRMoT models for two different catchments and compare model performance after calibration. By the end of this exercise you are expected to:
+
+\begin{itemize}
+	\item Be able to navigate model documentation and the inner workings of hydrologic model code;
+    \item Critically think about the relationship between model structure, catchment structure and model calibration and evaluation procedures.
+\end{itemize}
+
+\noindent
+The model setup approach used in this exercise (i.e. splitting data into calibration and evaluation periods and using an efficiency score to find the mathematically optimal parameter set) is common in hydrology but leaves ample room for improvement. The intent of this exercise is to highlight certain weaknesses of this approach and to encourage critical reflection on model calibration, evaluation and interpretation of model results.
+
+%% ------------------------------------------------------------------
+%% --- Assignment description
+%% ------------------------------------------------------------------
+
+\section{Assignment description}
+
+You have been provided with data for the catchments Middle Yegua Creek, Texas, and Raging River, Washington, extracted from the CAMELS data set \citep{Addor2017}. You will calibrate MARRMoT models \text{m02} and \text{m03} \citep{Knoben2019} for these catchments. 
+
+%
+\subsection{Exercise 1 – Get to know the catchments and models}
+
+First, do a brief investigation into the two catchments and models, to better understand what you are working with. Time series of meteorological forcing and streamflow observations are provided in the file \texttt{Part 2 - catchment data.mat}. Catchment attributes are provided in the file \texttt{Part 2 - catchment attributes.xlsx}. Descriptions of the models can be found in the Supplement of \citet{Knoben2019}: \url{https://gmd.copernicus.org/articles/12/2463/2019/gmd-12-2463-2019-supplement.pdf}. 
+
+\medskip \noindent
+\textbf{Exercises:}
+\begin{enumerate}
+	\item Load the time series data and create figures to show the meteorological forcing and streamflow observations for both catchments. Are these catchments water-limited or energy-limited?
+	\item Use the catchment attributes file to get an idea of the hydrologic conditions in these catchments. For both catchments, what is the average (1) aridity, (2) snow fraction, (3) runoff ratio, (4) streamflow, (5) fraction of the catchment covered by forest? Based on the information available, which hydrologic processes do you think are important in each catchment?
+	\item Briefly investigate model structures \text{m02} and \texttt{m03}. For both models, what (1) is the number of parameters, (2) what is the number of stores, and (3) which hydrologic processes are considered? 
+	\item Run each model for each catchment. You can use random parameters and arbitrary initial storage values. What are the Kling-Gupta efficiency scores the models obtain with these random settings?
+	\item Conduct a minor sensitivity analysis by trialing different parameter sets. Are there differences in parameter sensitivity? What is the best KGE score you were able to obtain?
+\end{enumerate}
+
+\medskip \noindent
+\textbf{Notes:}
+\begin{itemize}
+	\item For loading and plotting data, the following MATLAB commands may be useful: \texttt{load}, \texttt{figure}, \texttt{plot}.
+	\item MARRMoT workflow example 1 may be adapted to complete the modelling part of this exercise.
+\end{itemize}
+
+
+%
+\subsection{Exercise 2 – Model calibration}
+
+Now that you have a feeling for the catchments and models, estimate parameter values by calibrating both models for each catchment. Test the calibrated parameter performance on unseen evaluation data. 
+
+\medskip \noindent
+\textbf{Exercises:}
+\begin{enumerate}
+	\item Set up scripts to calibrate each model against streamflow observations for each catchment. Use data for the period 1989-01-01 to 1998-12-31 for calibration and the Kling-Gupta efficiency \citep[KGE,][]{Gupta2008} as an objective function.
+	\item Evaluate the KGE performance of the calibrated parameter sets on unseen data, i.e. data from the period 1999-01-01 to 2009-12-31.
+\end{enumerate}
+
+\medskip \noindent
+\textbf{Notes:}
+\begin{itemize}
+	\item For efficient use of time, it is recommended to set up your calibration and evaluation code using only a small subset of the available data. Only run the full 10-year calibration when you are satisfied that the code works is expected.
+	\item MARRMoT workflow example 4 may be adapted to complete this exercise.
+\end{itemize}
+
+
+%
+\subsection{Exercise 3 – Comparative assessment of model performance}
+
+Having calibrated two models for two catchments, critically assess difference and similarities in model performance. 
+
+\medskip \noindent
+\textbf{Exercises:}
+\begin{enumerate}
+	\item Compare calibration and evaluation scores of both models for catchment 08109700 (Middle Yegua Creek). Based on what you know of this catchment's streamflow regime and the two model structures, which difference between the model structures do you think causes the difference in performance?
+	\item Compare calibration and evaluation scores of both models  for catchment 12145500 (Raging River). Based on the objective function scores, is it clear which model is the most appropriate choice for this catchment?
+	\item Compare calibration and evaluation performance for both catchments for model \texttt{m02}. Based on these scores, do you think you can safely apply model \texttt{m02} in any catchment, regardless of the catchment's conditions?
+	\item Compare calibration and evaluation performance for both catchments for model \texttt{m03}. Based on what you know of both catchments' streamflow regime and the structure of model \texttt{m03}, is it possible that this model truthfully reflects the dominant hydrological process in both catchments? If so, does that mean your interpretation of the model's behaviour and fluxes is different for both catchments? If not, do you think the KGE scores alone are sufficient to determine in which catchment the model produces ``the right results for the right reasons?''
+	\item Given the comparisons above, formulate at least three take home messages about model structure uncertainty.
+\end{enumerate}
+
+\bibliography{ex2Bib}
+\bibliographystyle{apalike}
+
+\end{document}

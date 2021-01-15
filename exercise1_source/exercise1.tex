@@ -1,0 +1,193 @@
+% Model structure uncertainty with MARRMoT
+%
+% Authors: Knoben, W. J. M. & Spieler, D.
+% Date: 2021-01-10
+
+\documentclass[12pt]{article}
+
+%\usepackage{macros_local}
+\usepackage{amsmath}
+\usepackage{alltt}
+\usepackage{booktabs}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{pdflscape}
+\usepackage[dvipsnames,table]{xcolor}
+\usepackage{float}
+\usepackage{natbib}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    citecolor=blue,
+}
+
+\urlstyle{same}
+
+\usepackage{cleveref}
+
+\topmargin  = 0pt
+\headheight = 0pt
+\headsep    = 0pt
+
+\voffset    = 0in
+\hoffset    = 0in
+\textheight = 230mm
+\textwidth  = 164mm
+
+\evensidemargin = 0pt
+\oddsidemargin  = 0pt
+
+\begin{document}
+
+%% ------------------------------------------------------------------
+%% --- Header
+%% ------------------------------------------------------------------
+
+\begin{center}
+Teaching hydrologic modelling\\
+Showcasing model structure uncertainty with a ready-to-use teaching module \\
+\vspace*{3mm}
+Exercise 1: MARRMoT basics\\
+\end{center}
+
+\bigskip
+
+%% ------------------------------------------------------------------
+%% --- Introduction
+%% ------------------------------------------------------------------
+
+\section{Introduction}
+
+The MARRMoT toolbox comes with 4 prepared workflow examples that form the basis of this introductory exercise. Each workflow script is a stand-alone application of MARRMoT to a specific question. Students are encouraged to run the workflow examples as they are given, and then adjust each workflow example based on the exercise below. By the end of this exercise you are expected to:
+
+\begin{itemize}
+    \item Have basic understanding of MARRMoT functionality;
+    \item Be able to calibrate a hydrologic model and create diagnostic graphics that show the simulation results.
+\end{itemize}
+
+
+%% ------------------------------------------------------------------
+%% --- Install
+%% ------------------------------------------------------------------
+
+\section{Install instructions}
+
+The MARRMoT source code can be obtained through GitHub. If you have a GitHub account:
+
+\begin{enumerate}
+	\item Fork the repository \url{https://github.com/wknoben/marrmot} to your own GitHub account;
+	\item Create a local clone of the forked repository.
+\end{enumerate}
+
+\noindent
+If you do not have a GitHub account:
+
+\begin{enumerate}
+	\item Go to \url{https://github.com/wknoben/marrmot};
+	\item Download the repository as a \texttt{.zip} file ([Code] $\textgreater$ [Download ZIP]);
+	\item Extract the downloaded files.
+\end{enumerate}
+
+\noindent
+Once the files are on your local machine:
+
+\begin{enumerate}
+	\item Remove the folder \texttt{Octave} from the downloaded files if you plan on using Matlab;
+	\item Start Matlab or Octave;
+	\item Add the downloaded \texttt{MARRMoT} folder to your Matlab/Octave path.
+\end{enumerate}
+
+%% ------------------------------------------------------------------
+%% --- Assignment description
+%% ------------------------------------------------------------------
+
+\section{Assignment description}
+
+The workflows that form the basis of the exercises below can be found in the downloaded \texttt{MARRMoT} folder, inside the sub-folder \texttt{User manual}.
+
+%
+\subsection{Workflow example 1 – use a model}
+
+Workflow summary: use the HyMOD model (MARRMoT ID m29) for streamflow simulation in an example catchment with a pre-defined parameter set and arbitrary initial conditions. Assess the accuracy of the simulation through the Kling-Gupta Efficiency metric. 
+
+\medskip \noindent
+\textbf{Exercises:}
+\begin{enumerate}
+	\item Run the workflow example and compare the resulting streamflow simulations with observations. What would you improve in the model setup?
+	\item The given parameter set performs poorly in this catchment. Try a set of different parameters. Did the simulation improve?
+\end{enumerate}
+
+\medskip \noindent
+\textbf{Notes:}
+\begin{itemize}
+	\item You can use the function \texttt{m\_29\_hymod\_5p\_5s\_parameter\_ranges} in \texttt{./MARRMoT/Models/Parameter range files/} to view plausible parameter ranges.
+	\item Adjust the initial storage values if required. It is good practice to not initialize a store above its maximum capacity.
+\end{itemize}
+
+
+%
+\subsection{Workflow example 2 – parameter sampling}
+
+Workflow summary: use the HyMOD model for streamflow simulation by randomly sampling parameter values from MARRMoT’s provided parameter ranges. Plot the ensemble of simulations.
+
+\medskip \noindent
+\textbf{Exercises:}
+\begin{enumerate}
+	\item Run the workflow example and compare the resulting streamflow simulations with observations. What would you improve in the model setup?
+	\item It is possible that the HyMOD model is not suitable for this particular catchment. Choose a different model structure and re-do the sampling. Does performance improve? Why (not)?
+\end{enumerate}
+
+\medskip \noindent
+\textbf{Notes:}
+\begin{itemize}
+	\item The MARRMoT documentation (\url{https://gmd.copernicus.org/articles/12/2463/2019/gmd-12-2463-2019-supplement.pdf}) contains an overview of model structures.
+	\item You may need to adjust the initial storage values to fit the new model choice. Ensure that you specify the same number of initial storage values as your chosen model has stores. Set the initial storages to values that fall within the possible range of each store in the new model.
+\end{itemize}
+
+
+%
+\subsection{Workflow example 3 – model sampling}
+
+Workflow summary: use three different models with a randomly selected parameter set for streamflow simulation.
+
+\medskip \noindent
+\textbf{Exercises:}
+\begin{enumerate}
+	\item Run the workflow example and compare the resulting streamflow simulations with observations. What would you improve in the model setup?
+	\item Plot the evaporation simulations from each model. Do these look better than the streamflow simulations? 
+\end{enumerate}
+
+\medskip \noindent
+\textbf{Notes:}
+\begin{itemize}
+	\item All simulation outputs can be found in the cell array “results\_sampling”. Check the model function call in the workflow script to see which results are stored where (lines 93-111).
+\end{itemize}
+
+
+%
+\subsection{Workflow example 4 – model calibration}
+
+Workflow summary: calibrate the HyMOD model for streamflow simulation.
+
+\medskip \noindent
+\textbf{Exercises:}
+\begin{enumerate}
+	\item Run the workflow example and compare the resulting streamflow simulations with observations. What would you improve in the model setup?
+	\item Plot timeseries of HyMOD’s simulated storage during the evaluation period. Do these look reasonable? 
+	\item Estimating appropriate initial storage values is not attempted in these workflow examples. Is there a way to find better initial guesses of these initial conditions? If not, how can the model simulations be used in a way that reduces the impact of poor initial storage estimates?
+	\item (Optional) Implement a way to improve the initial storage guesses or a way to reduce the impact of poor guesses.
+\end{enumerate}
+
+\medskip \noindent
+\textbf{Notes:}
+\begin{itemize}
+	\item The workflow code currently doesn’t save the simulated storage values. Adjust line 166 so that it does. See the script of workflow example 3 for an example of how to do this.
+	\item The script for workflow example 1 contains code that plots time series of simulated storage values.
+\end{itemize}
+
+
+\end{document}
