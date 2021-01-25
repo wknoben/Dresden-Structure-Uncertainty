@@ -3,7 +3,7 @@ This repository contains a teaching module that can be used to showcase hydrolog
 The module contains data, example exercise sheets and an example answer script.
 Data are part of the CAMELS data set (Addor et al., 2017).
 Models used are part of the MARRMoT framework (Knoben et al., 2019).
-The module is split into two parts. I
+The module is split into two parts.
 In the first, students obtain familiarity with the MARRMoT framework.
 In the second, students are asked to calibrate two MARRMoT models for two CAMELS catchments and draw their own conclusions about model structure uncertainty.
 
