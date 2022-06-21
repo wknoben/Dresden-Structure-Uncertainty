@@ -27,7 +27,7 @@ The `.m` file shows how one of the scripts introduced in the first part of the e
 The `.mat` file contains calibrated parameter sets for the four combinations of models and catchments, and Kling-Gupta Efficiency (Gupta et al., 2009) scores obtained for calibration and evaluation time periods for all four cases.
 
 ### Note on MARRMoT versions
-MARRMoT has been updated to version 2.x in 2022. One of the changes is inclusion of a dedicated calibration function contained within the main MARRMoT model class. 
+MARRMoT has been updated to version 2.x in 2022 (Trotter et al., under review). One of the changes is inclusion of a dedicated calibration function contained within the main MARRMoT model class. 
 To aid users of both the old (v1.x) and new (v2.x) versions, this repository contains example calibration code for both.
 Calibration results are unchanged between both MARRMoT versions.
 Overview:
@@ -50,6 +50,8 @@ Addor, N., Newman, A. J., Mizukami, N., and Clark, M. P. (2017). _The CAMELS dat
 
 Gupta,  H.  V.,  Kling,  H.,  Yilmaz,  K.  K.,  and  Martinez,  G.  F. (2009). _Decomposition  of  the  mean  squared  error  and  NSE  performance  criteria:Implications for improving hydrological modelling_. Journal of Hydrology, 377, 80–91, https://doi.org/10.1016/j.jhydrol.2009.08.003, http://dx.doi.org/10.1016/j.jhydrol.2009.08.003/
 
-Knoben, W. J., Freer, J. E., Fowler, K. J., Peel, M. C., and Woods, R. A. (2019). _Modular Assessment of Rainfall-Runoff Models Toolbox (MARRMoT) v1.2: An open-source, extendable framework providing implementations of 46 conceptual hydrologic models as continuous state-space formulations_. Geoscientific Model Development, 12, 2463–2480, https://doi.org/10.5194/gmd-12-2463-2019/
+Knoben, W. J. M., Freer, J. E., Fowler, K. J., Peel, M. C., and Woods, R. A. (2019). _Modular Assessment of Rainfall-Runoff Models Toolbox (MARRMoT) v1.2: An open-source, extendable framework providing implementations of 46 conceptual hydrologic models as continuous state-space formulations_. Geoscientific Model Development, 12, 2463–2480, https://doi.org/10.5194/gmd-12-2463-2019/
 
 Knoben, W. J. M. and Spieler, D. (accepted). _Teaching hydrological modelling: Illustrating model structure uncertainty with a ready-to-use teaching module_. HESS. Preprint DOI: https://doi.org/10.5194/hess-2021-30
+
+Trotter, L., Knoben, W. J. M., Fowler, K. J. A., Saft, M., and Peel, M. C.: Modular Assessment of Rainfall–Runoff Models Toolbox (MARRMoT) v2.1: an object-oriented implementation of 47 of your favourite hydrologic models for improved speed and readability, Geosci. Model Dev. Discuss. [preprint], https://doi.org/10.5194/gmd-2022-135, in review, 2022
