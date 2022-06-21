@@ -195,3 +195,87 @@ end
 
 % Save results to disk
 save calibrationResults.mat calibrationResults
+
+
+%% Parameter uncertainty sampling
+N = 10000; % Number of parameter samples to test
+
+% Create empty storage structures
+for c = 1:length(catchments)
+    for m = 1:length(models)
+        samplingResults.(catchments{c}).(models{m}).par = zeros(N,4);
+        samplingResults.(catchments{c}).(models{m}).KGE_cal = zeros(N,1);
+    end
+end
+
+% Initiate the catchment loop
+for c = 1:length(catchments)
+    
+    % Create a climatology data input structure. 
+    % NOTE: the names of all structure fields are hard-coded in each model
+    % file. These should not be changed.
+    input_climatology.precip   = catchmentData.(catchments{c})(:,2);        % Daily data: P rate  [mm/d]
+    input_climatology.temp     = catchmentData.(catchments{c})(:,3);        % Daily data: mean T  [degree C]
+    input_climatology.pet      = catchmentData.(catchments{c})(:,4);        % Daily data: Ep rate [mm/d]
+    input_climatology.delta_t  = 1;                                         % time step size of the inputs: 1 [d]
+    
+    % Create temporary calibration time series
+    input_climate_cal.precip  = input_climatology.precip(time_cal_start:time_cal_end);
+    input_climate_cal.temp    = input_climatology.temp(time_cal_start:time_cal_end);
+    input_climate_cal.pet     = input_climatology.pet(time_cal_start:time_cal_end);
+    input_climate_cal.delta_t = input_climatology.delta_t;
+    q_obs_cal                 = catchmentData.(catchments{c})(time_cal_start:time_cal_end,5);
+    
+    % Initiate the model loop
+    for m = 1:length(models)
+    
+        % Model settings
+        model    = models{m};                                               % Name of the model function (these can be found in Supporting Material 2)
+        parRange = feval([model,'_parameter_ranges']);                      % Parameter ranges
+        numPar   = size(parRange,1);                                        % Number of parameters
+        numStore = str2double(model(end-1));                                % Number of stores
+        input_s0 = zeros(numStore,1);                                       % Initial storages (see note in paragraph 5 on model warm-up)
+        
+        % Initiate sampling loop
+        disp('--- Sampling starting ---')
+        for n = 1:N
+            
+            % Get a random parameter sample
+            par_trial = parRange(:,1) + (parRange(:,2)-parRange(:,1)) .* rand(numPar,1);
+            
+            % Run the trial parameter set to obtain simulated flows
+            q_sim_trial = workflow_calibrationAssist(...                    % Auxiliary function that returns Qsim
+                                model,...                                   % Model name
+                                input_climate_cal,...                       % Climate data during calibration period
+                                input_s0,...                                % Initial storages
+                                par_trial,...                               % Randomly sampled parameter set
+                                input_solver);                              % Solver settings
+                            
+            % Calculate the calibration KGE
+            cal_kge = feval(of_name, ...                                    % The objective function, here this is 'of_KGE'
+                            q_obs_cal,...                                   % Observed flow during calibration period
+                            q_sim_trial);                                   % Simulated flow for a given parameter set
+            
+            % Save the parameter set and KGE score
+            samplingResults.(catchments{c}).(models{m}).par(n,:) = par_trial;
+            samplingResults.(catchments{c}).(models{m}).KGE_cal(n) = cal_kge;
+        end
+    end
+end
+
+% Save results to disk
+save samplingResults.mat samplingResults 
+
+%% Visualize
+for c = 1:length(catchments)
+    for m = 1:length(models)
+        figure;
+        for i=1:4 
+            subplot(2,2,i); 
+            scatter(samplingResults.(catchments{c}).(models{m}).par(:,i),samplingResults.(catchments{c}).(models{m}).KGE_cal,'.');
+            ylim([1-sqrt(2),1])
+            title([catchments{c}, ' ',models{m}])
+        end
+    end
+end
+
