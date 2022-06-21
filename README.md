@@ -54,4 +54,4 @@ Knoben, W. J. M., Freer, J. E., Fowler, K. J., Peel, M. C., and Woods, R. A. (20
 
 Knoben, W. J. M. and Spieler, D. (accepted). _Teaching hydrological modelling: Illustrating model structure uncertainty with a ready-to-use teaching module_. HESS. Preprint DOI: https://doi.org/10.5194/hess-2021-30
 
-Trotter, L., Knoben, W. J. M., Fowler, K. J. A., Saft, M., and Peel, M. C.: Modular Assessment of Rainfall–Runoff Models Toolbox (MARRMoT) v2.1: an object-oriented implementation of 47 of your favourite hydrologic models for improved speed and readability, Geosci. Model Dev. Discuss. [preprint], https://doi.org/10.5194/gmd-2022-135, in review, 2022
+Trotter, L., Knoben, W. J. M., Fowler, K. J. A., Saft, M., and Peel, M. C.: _Modular Assessment of Rainfall–Runoff Models Toolbox (MARRMoT) v2.1: an object-oriented implementation of 47 of your favourite hydrologic models for improved speed and readability_. Geosci. Model Dev. Discuss. [preprint], https://doi.org/10.5194/gmd-2022-135, in review, 2022
