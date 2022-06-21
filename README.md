@@ -1,6 +1,6 @@
 # Teaching hydrological modelling: Illustrating model structure uncertainty with a ready-to-use teaching module
-This repository contains a teaching module that can be used to showcase hydrologic model structure uncertainty (Knoben and Spieler, under review).
-The module contains data, example exercise sheets and an example answer script.
+This repository contains a teaching module that can be used to showcase hydrologic model structure uncertainty (Knoben and Spieler, HESS, accepted).
+The module contains data, example exercise sheets and example answer scripts.
 Data are part of the CAMELS data set (Addor et al., 2017).
 Models used are part of the MARRMoT framework (Knoben et al., 2019).
 The module is split into two parts.
@@ -52,4 +52,4 @@ Gupta,  H.  V.,  Kling,  H.,  Yilmaz,  K.  K.,  and  Martinez,  G.  F. (2009). _
 
 Knoben, W. J., Freer, J. E., Fowler, K. J., Peel, M. C., and Woods, R. A. (2019). _Modular Assessment of Rainfall-Runoff Models Toolbox (MARRMoT) v1.2: An open-source, extendable framework providing implementations of 46 conceptual hydrologic models as continuous state-space formulations_. Geoscientific Model Development, 12, 2463–2480, https://doi.org/10.5194/gmd-12-2463-2019/
 
-Knoben, W. J. M. and Spieler, D. (under review). _Teaching hydrological modelling: Illustrating model structure uncertainty with a ready-to-use teaching module_. Submitted to HESS.
+Knoben, W. J. M. and Spieler, D. (accepted). _Teaching hydrological modelling: Illustrating model structure uncertainty with a ready-to-use teaching module_. HESS. Preprint DOI: https://doi.org/10.5194/hess-2021-30
