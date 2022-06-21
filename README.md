@@ -22,9 +22,27 @@ The `.mat` file contains time series of meteorological data and streamflow obser
 How students shoud use both files is explained in the example handout for the second part of the exercise.
 
 ## Calibration outcomes
-Files **calibrationScriptExample.m** and **calibrationResults.mat** contain the answers to the second part of the module.
+Files **calibrationScriptExample_MARRMoT_v1.m**,**calibrationScriptExample_MARRMoT_v2.m** and **calibrationResults.mat** contain the answers to the second part of the module.
 The `.m` file shows how one of the scripts introduced in the first part of the exercise may be adapted to solve the second part of the exercise.
 The `.mat` file contains calibrated parameter sets for the four combinations of models and catchments, and Kling-Gupta Efficiency (Gupta et al., 2009) scores obtained for calibration and evaluation time periods for all four cases.
+
+### Note on MARRMoT versions
+MARRMoT has been updated to version 2.x in 2022. One of the changes is inclusion of a dedicated calibration function contained within the main MARRMoT model class. 
+To aid users of both the old (v1.x) and new (v2.x) versions, this repository contains example calibration code for both.
+Calibration results are unchanged between both MARRMoT versions.
+Overview:
+
+- MARRMoT v1.x
+	- Latest release: v1.4
+	- Latest release DOI: https://dx.doi.org/10.5281/zenodo.6460624
+	- Calibration code example: `calibrationScriptExample_MARRMoT_v1.m`
+	- Paper: https://doi.org/10.5194/gmd-12-2463-2019
+	- Paper supplements: https://gmd.copernicus.org/articles/12/2463/2019/gmd-12-2463-2019-supplement.pdf
+- MARRMoT v2.x
+	- Latest release: v2.1
+	- Latest release DOI: https://doi.org/10.5281/zenodo.6484372
+	- Calibration code example: `calibrationScriptExample_MARRMoT_v2.m`
+	- Preprint: https://doi.org/10.5194/gmd-2022-135
 
 
 ## References
